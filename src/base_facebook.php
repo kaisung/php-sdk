@@ -696,7 +696,9 @@ abstract class BaseFacebook
   protected function _restserver($params) {
     // generic application level parameters
     $params['api_key'] = $this->getAppId();
-    $params['format'] = 'json-strings';
+    if (!isset($params['format'])) {
+        $params['format'] = 'json-strings';
+    }
 
     $result = json_decode($this->_oauthRequest(
       $this->getApiUrl($params['method']),
